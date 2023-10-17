@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <h2>Products</h2>
+      <div><app-search (searchTextChanged)="ValueToBeSearched($event)"></app-search></div>
+      <div class="row">
+        <div *ngFor="let product of products" class="col-lg-4">
+          <div *ngIf= " searchValue ==='' ||  product.title.toLowerCase().includes(searchValue) ">
+            <app-card [product]="product" (addItem)="insertProduct($event)" class="display_card"></app-card>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="col-lg-4">
+  <h2>Cart</h2>
+  <ol class="list-group list-group-numbered">
+   <app-cart-items 
+    *ngFor="let item of cartItems" [item]="item"
+    (removeFromCart)="removeItem($event)"
+    (AddToCart)="addItem($event)">
+  </app-cart-items>
+  </ol>
+  <h2>Total: EUR {{total}}</h2>
+</div>
+  </div>
+</div>
